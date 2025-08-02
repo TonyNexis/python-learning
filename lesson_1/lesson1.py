@@ -17,4 +17,10 @@ result = usd_rate * uah_amount
 if result.is_integer():
     print(f"Ви отримаєте: {int(result)} гривень") 
 else:
-    print(f"Ви отримаєте: {result:.2f} гривень") 
+    # print(f"Ви отримаєте: {result:.2f} гривень") 
+    print(f"Ви отримаєте: {round(result, 2)} гривень") 
+
+
+
+
+

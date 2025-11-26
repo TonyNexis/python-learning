@@ -1,3 +1,5 @@
+import webbrowser
+
 #testing features
 # print('Hello world')
 # print("Hell\o \w\o\\rl\d")
@@ -207,3 +209,19 @@ school.get_info()
 house = Shop(1980, 'Lviv')
 house.get_info()
 shop = Building(2005, 'Kiev')
+
+
+def validator(func):
+    def wrapper(url):
+        if '.' in url:
+            func(url)
+        else:
+            print('Error')
+    return wrapper
+
+@validator
+def open_url(url):
+    webbrowser.open(url)
+
+
+open_url('wwwgooglecom')

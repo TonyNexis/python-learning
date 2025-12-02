@@ -14,16 +14,26 @@
 password = 'hello'
 counter = 3
 
-while counter >= 1:
-    inputPassword = input('Введіть пароль: ')
-    if inputPassword == password:
-        print('Удача, пароль правильний')
-        break
-    else:
-        counter -= 1
-        if counter >= 1:
-            print(f'Помилка, у вас лишилось {counter} спроб')
+# while counter >= 1:
+#     inputPassword = input('Введіть пароль: ')
+#     if inputPassword == password:
+#         print('Удача, пароль правильний')
+#         break
+#     else:
+#         counter -= 1
+#         if counter >= 1:
+#             print(f'Помилка, у вас лишилось {counter} спроб')
         
-if counter < 1:
-    print('Ви перевищили ліміт спроб!')
+# if counter < 1:
+#     print('Ви перевищили ліміт спроб!')
     
+
+# for i in range(101):
+#     if i % 2:
+#         continue
+#     print(i)
+
+
+for i in reversed(range(100)):
+    if i % 5 == 0:
+        print(i)

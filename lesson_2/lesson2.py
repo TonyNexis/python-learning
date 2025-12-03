@@ -34,6 +34,19 @@ counter = 3
 #     print(i)
 
 
-for i in reversed(range(100)):
-    if i % 5 == 0:
-        print(i)
+# for i in reversed(range(100)):
+#     if i % 5 == 0:
+#         print(i)
+
+test = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+
+
+# max = test[0]
+
+# for i in range(1, len(test)):
+#     if test[i] > max:
+#         max = test[i]
+
+# print(max)
+
+print(max(test))

@@ -50,3 +50,37 @@ test = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 # print(max)
 
 print(max(test))
+
+
+books = {}
+
+def add_books(dictionary):
+    print('\n--- Додавання книги ---')
+    book_title = input('Введіть назву книги: ').strip()
+
+    if not book_title:
+        print("Назва книги не може бути порожньою, спробуйте ще раз.")
+        return
+
+    while True:
+        status_input = input(f'Чи прочитана книга {book_title}? (так/ні)').strip().lower()
+
+        if status_input in ['так', 'y', 'yes', 'true', 't', 'т']:
+            is_read = True
+            break
+        elif status_input in ['ні', 'n', 'no', 'false', 'f', 'н']:
+            is_read = False
+            break
+        else:
+            print('Невірне введеня. Будь ласка введіть "так" або "ні".')
+
+        
+    dictionary[book_title] = is_read
+
+    print(f'\n Книгу "{book_title}" зі статусом "Прочитана: {is_read}" додано.')
+
+add_books(books)
+add_books(books)
+
+print('\n --- Поточний список книг ---')
+print(books)

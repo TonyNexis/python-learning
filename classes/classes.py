@@ -13,6 +13,9 @@ class Test:
         self.additional_colors = additional_colors
         self.autopilot = autopilot
 
+    def view_info(self):
+        print(f'some info ==> {self.side_text}')
+
 @dataclass(frozen=True)
 class Plane:
     side_text: str

@@ -1,5 +1,6 @@
 from inheritance import NewStore
 
+
 class BeerStore(NewStore):
     water = 10000
     beer = 20

@@ -110,3 +110,27 @@ some_names = ["Vova", "Anton", "Jakonda", "Valentina", "Volodimir"]
 
 print(get_long_names(some_names))
 
+def new_test_func(names: list[str]) -> list[str]:
+    return [name for name in names if len(name) > 5]
+
+print(new_test_func(some_names))
+
+def convert_prices(prices: list[float]) -> list[float]:
+    """Конвертує ціни > 1000 грн у долари."""
+    return [price/40 for price in prices if price > 1000]
+
+price_list = [400.0, 2000.0, 80.0, 4000.0]
+
+print(convert_prices(price_list))
+
+items = [
+    {"name": "Phone", "price": 15000},
+    {"name": "Case", "price": 500},
+    {"name": "Laptop", "price": 45000},
+    {"name": "Cable", "price": 300}
+]
+
+def get_expensive_items(items: list[dict]) -> list[str]:
+    return [item["name"] for item in items if item["price"] > 1000]
+
+print(get_expensive_items(items))

@@ -130,7 +130,35 @@ items = [
     {"name": "Cable", "price": 300}
 ]
 
-def get_expensive_items(items: list[dict]) -> list[str]:
-    return [item["name"] for item in items if item["price"] > 1000]
+dirty_items = [
+    {"name": "Phone", "price": 15000},
+    {"price": 50000},  # Немає імені
+    {"name": "Mystery Box"},  # Немає ціни
+    {"name": "Case", "price": 200}
+]
 
-print(get_expensive_items(items))
+def get_expensive_items(items: list[dict]) -> list[str]:
+    return [item.get('name', 'Unknown Item') for item in items if save_price_check(item)]
+
+# print(get_expensive_items(dirty_items))
+
+def save_price_check(item: dict) -> bool:
+    """
+    Перевіряє ціну на безпечність та поріг у 1000.
+    """
+
+    try:
+        price = float(item.get("price", 0))
+        return price > 1000
+    except (ValueError, TypeError):
+        return False
+
+
+broken_items = [
+    {"name": "Phone", "price": 10000},
+    {"name": "Laptop", "price": "ціна за запитом"},
+    {"price": 5000}, # Немає імені
+    {"name": "Old Cable", "price": None} # Ціна є, але вона порожня
+]
+
+print(get_expensive_items(broken_items))

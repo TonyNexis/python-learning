@@ -1,4 +1,4 @@
-# # from dataclasses import dataclass
+from dataclasses import dataclass
 # # from typing import ClassVar
 
 
@@ -138,16 +138,46 @@
 # ]
 
 
+# class BankAccount:
+#     def __init__(self, owner: str, balance: float = 0):
+#         self.owner = owner
+#         self.balance = balance
+
+#     def deposit(self, amount: float):
+#         self.balance += amount
+#         print(f'Рахунок поповнено на {amount}. Новий баланс: {self.balance}')
+    
+#     def withdraw(self, amount: int):
+#         if amount > self.balance:
+#             print('Недостатньо коштів на рахунку!')
+#             return
+#         self.balance -= amount
+#         print(f'З рахунка знято {amount}, Новий баланс: {self.balance}')
+
+# my_acc = BankAccount("Taras", 1000)
+# my_acc.deposit(500)
+# my_acc.withdraw(200) # Має написати про нестачу коштів
+
+# class SavingsAccount(BankAccount):
+#     def __init__(self, owner: str, balance: float, interest_rate: float):
+#         super().__init__(owner, balance)
+#         self.interest_rate = interest_rate
+
+#     def add_interest(self):
+#         interest_amount = self.balance * (self.interest_rate / 100)
+#         self.deposit(interest_amount)
+
+@dataclass
 class BankAccount:
-    def __init__(self, owner: str, balance: float = 0):
-        self.owner = owner
-        self.balance = balance
+    owner: str
+    balance: float = 0.0
 
     def deposit(self, amount: float):
         self.balance += amount
         print(f'Рахунок поповнено на {amount}. Новий баланс: {self.balance}')
-    
-    def withdraw(self, amount: int):
+
+
+    def withdraw(self, amount: float):
         if amount > self.balance:
             print('Недостатньо коштів на рахунку!')
             return
@@ -155,8 +185,15 @@ class BankAccount:
         print(f'З рахунка знято {amount}, Новий баланс: {self.balance}')
 
 
-    
 
-my_acc = BankAccount("Taras", 1000)
-my_acc.deposit(500)
-my_acc.withdraw(200) # Має написати про нестачу коштів
+@dataclass
+class SavingsAccount(BankAccount):
+    interest_rate: float = 0.0
+
+    def add_interest(self):
+        interest_amount = self.balance * (self.interest_rate / 100)
+        self.deposit(interest_amount)
+
+tony = SavingsAccount('Tony', 2000, 10)
+tony.add_interest()
+

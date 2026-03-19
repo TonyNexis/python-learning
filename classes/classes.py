@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+
 # # from typing import ClassVar
 
 
@@ -197,3 +198,19 @@ class SavingsAccount(BankAccount):
 tony = SavingsAccount('Tony', 2000, 10)
 tony.add_interest()
 
+def account_numbers():
+    number = 0
+
+    while True:
+        number += 1
+        if number > 9999:
+            yield 'Error! Number ID is max.'
+            break
+        yield f'UA{number:04}'
+
+
+gen = account_numbers()
+print(next(gen))
+print(next(gen))
+print(next(gen))
+print(next(gen))

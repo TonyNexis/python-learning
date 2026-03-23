@@ -1,7 +1,12 @@
+import os
 from dataclasses import dataclass
+from datetime import datetime
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_FILE = os.path.join(BASE_DIR, "bank_log.txt")
 
 # # from typing import ClassVar
-
+print(f'Here we are ==> {__file__}')
 
 # # class Test: 
 # #     def __init__(
@@ -167,12 +172,42 @@ from dataclasses import dataclass
 #     def add_interest(self):
 #         interest_amount = self.balance * (self.interest_rate / 100)
 #         self.deposit(interest_amount)
+def transaction_logger(func):
+    def wrapper(*args, **kwargs):
+        print('[LOG]: Виконується операція...')
+
+        result = func(*args, **kwargs)
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        with open (LOG_FILE, 'a', encoding='utf-8') as file:
+            owner_name = args[0].owner if args and hasattr(args[0], 'owner') else "Unknown"
+            file.write(f"[{now}] Користувач {owner_name}: {func.__name__} виконано.\n")
+
+        print('[LOG] Операція завершена.')
+
+        return result
+    return wrapper
+
+def validate_amount(func):
+    """
+    Декоратор, який перевіряє від'ємні суми.
+    """
+    def wrapper(*args, **kwargs):
+        amount = args[1] if len(args) > 1 else args[0]
+        if amount < 0:
+            print("Помилка: Сума не може бути від'ємною!")
+            return
+        result = func(*args, **kwargs)
+        return result
+    return wrapper
 
 @dataclass
 class BankAccount:
     owner: str
     balance: float = 0.0
 
+    @validate_amount
+    @transaction_logger
     def deposit(self, amount: float):
         self.balance += amount
         print(f'Рахунок поповнено на {amount}. Новий баланс: {self.balance}')
@@ -210,7 +245,23 @@ def account_numbers():
 
 
 gen = account_numbers()
-print(next(gen))
-print(next(gen))
-print(next(gen))
-print(next(gen))
+# print(next(gen))
+# print(next(gen))
+# print(next(gen))
+# print(next(gen))
+
+
+def my_decorator(func):
+    def wrapper():
+        print('Дія ДО')
+        func()
+        print("Дія ПІСЛЯ")
+    return wrapper
+
+
+@transaction_logger
+def make_payment(amount, currency='USD'):
+    print(f'Оплата на суму {amount} {currency} пройшла успішно.')
+
+# make_payment(1000)
+# make_payment(500, currency="UAH")
